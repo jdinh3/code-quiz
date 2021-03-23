@@ -8,7 +8,13 @@
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
-    <a href="#" id="viewScores">View Highscores</a>
+    <header>
+      <div>
+        <a href="#" id="viewScores">View Highscores</a>
+        <h2>Timer</h2>
+      </div>
+    </header>
+
     <div id="intro-page">
       <h1>Coding Quiz Challenge</h1>
       <p>
@@ -16,19 +22,17 @@
         limit. Keep in mind that incorrect answers will penalize your score/time
         by ten seconds!
       </p>
+      <button id="start-btn" class="start-btn btn">Start Quiz</button>
     </div>
     <div id="quiz-container" class="hide">
-      <div id="question">Question</div>
-      <div id="answer-btns" class="btn-grid">
-        <button class="btn">Answer1</button>
-        <button class="btn">Answer2</button>
-        <button class="btn">Answer3</button>
-        <button class="btn">Answer4</button>
+      <div id="current-question"></div>
+      <div id="answer-btn" class="btn-grid">
+        <button class="btn" id="option1"></button>
+        <button class="btn" id="option2"></button>
+        <button class="btn" id="option3"></button>
+        <button class="btn" id="option4"></button>
+        <button id="next-btn hide">Next</button>
       </div>
-    </div>
-    <div class="controls">
-      <button id="start-btn" class="start-btn btn">Start Quiz</button>
-      <button id="next-btn" class="next-btn hide">Next</button>
     </div>
     <script src="assets/css/script.js"></script>
   </body>

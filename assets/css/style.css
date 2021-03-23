@@ -1,0 +1,48 @@
+/* Universal Selectors */
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Element Selectors */
+
+button {
+    background-color: purple;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 20px;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Class Selectors */
+
+.btn-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, auto);
+}
+ 
+.hide {
+    display: none;
+}
+
+/* ID selectors */
+
+#answer-btns {
+    padding: 20px;
+}
+
+#question {
+font-size: 2em;
+}

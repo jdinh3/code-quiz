@@ -7,12 +7,13 @@ var firstAnswerEl = document.getElementById("option1");
 var secondAnswerEl = document.getElementById("option2");
 var thirdAnswerEl = document.getElementById("option3");
 var fourthAnswerEl = document.getElementById("option4");
-var currentIndex = 0;
 var answerKeyEl = document.getElementById("answerKey");
 var timerEl = document.getElementById("timer");
+var scoreEl = document.getElementById("userScore");
+var scoreContainerEl = document.getElementById("score-container");
 
 // Javascript Variables
-
+var currentIndex = 0;
 const questionsArray = [
   {
     question: "Commonly used data types DO NOT include:",
@@ -51,10 +52,10 @@ const questionsArray = [
 // Functions
 function startQuiz() {
   console.log("Quiz has started");
-  introEl.setAttribute("style", "display: none");
-  questionContainerEl.classList.remove("hide");
   startTimer();
   showNextQuestion();
+  introEl.setAttribute("style", "display: none");
+  questionContainerEl.classList.remove("hide");
 }
 
 // Timer Function
@@ -71,7 +72,17 @@ function startTimer() {
       timerEl.textContent = "";
       clearInterval(timeInterval);
     }
-  }, 700);
+  }, 1000);
+  if (currentIndex === questionsArray.length) {
+    console.log(timeLeft);
+    clearInterval(timeInterval);
+  }
+}
+
+function scorePage(timeLeft) {
+  var scorePrompt = document.createElement("h1");
+  scorePrompt.textContent = "All Done! Your final score is: " + timeLeft;
+  scoreEl.append(scorePrompt);
 }
 
 function showNextQuestion() {
@@ -99,16 +110,22 @@ function answerSelection(event) {
     var correctResponse = document.createElement("h2");
     correctResponse.textContent = "That was the correct answer!";
     answerKeyEl.textContent = correctResponse.textContent;
-    showNextQuestion();
     // If selected answer is incorrect answer, show response
   } else {
     console.log("Incorrect!");
     var incorrectResponse = document.createElement("h2");
     incorrectResponse.textContent = "That was incorrect!";
     answerKeyEl.textContent = incorrectResponse.textContent;
+  }
+  if (currentIndex < questionsArray.length) {
     showNextQuestion();
+  } else {
+    questionContainerEl.setAttribute("style", "display: none");
+    scoreContainerEl.classList.remove("hide");
+    scorePage();
   }
 }
+
 // // Event listeners
 
 startButton.addEventListener("click", startQuiz);

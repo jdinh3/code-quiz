@@ -9,7 +9,7 @@
   </head>
   <body>
     <header>
-      <a href="#" id="viewScores">View Highscores</a>
+      <a href="scores.html" id="viewScores">View Highscores</a>
       <div id="timer"></div>
     </header>
 
@@ -18,18 +18,18 @@
       <p>
         Try to answer the following code-related questions within the time
         limit. Keep in mind that incorrect answers will penalize your score/time
-        by ten seconds!
+        by five seconds!
       </p>
       <button id="start-btn" class="start-btn btn">Start Quiz</button>
     </div>
     <div id="score-container" class="hide">
       <div id="userScore"></div>
       <div id="initalsPrompt">
-        <div id="input">
+        <form id="input">
           <label for="Initials">Enter Initials:</label>
           <input type="text" id="initials" />
           <button id="submitBtn">Submit</button>
-        </div>
+        </form>
       </div>
     </div>
     <div id="quiz-container" class="hide">
@@ -43,6 +43,6 @@
       <br />
       <div id="answerKey"></div>
     </div>
-    <script src="assets/css/script.js"></script>
+    <script src="assets/js/script.js"></script>
   </body>
 </html>

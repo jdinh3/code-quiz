@@ -11,9 +11,14 @@ var answerKeyEl = document.getElementById("answerKey");
 var timerEl = document.getElementById("timer");
 var scoreEl = document.getElementById("userScore");
 var scoreContainerEl = document.getElementById("score-container");
+var submitBtn = document.getElementById("submitBtn");
 
 // Javascript Variables
 var currentIndex = 0;
+var timeLeft = 30;
+var timeInterval;
+
+// Array of Quiz Questions
 const questionsArray = [
   {
     question: "Commonly used data types DO NOT include:",
@@ -51,6 +56,7 @@ const questionsArray = [
 
 // Functions
 function startQuiz() {
+  shuffle(questionsArray);
   console.log("Quiz has started");
   startTimer();
   showNextQuestion();
@@ -60,8 +66,7 @@ function startQuiz() {
 
 // Timer Function
 function startTimer() {
-  var timeLeft = 30;
-  var timeInterval = setInterval(function () {
+  timeInterval = setInterval(function () {
     if (timeLeft > 1) {
       timerEl.textContent = timeLeft + " seconds left!";
       timeLeft--;
@@ -69,17 +74,22 @@ function startTimer() {
       timerEl.textContent = timeLeft + " second left!";
       timeLeft--;
     } else {
-      timerEl.textContent = "";
-      clearInterval(timeInterval);
+      gameOver();
     }
   }, 1000);
-  if (currentIndex === questionsArray.length) {
-    console.log(timeLeft);
-    clearInterval(timeInterval);
-  }
 }
 
-function scorePage(timeLeft) {
+// Game Over function
+function gameOver() {
+  questionContainerEl.setAttribute("style", "display: none");
+  scoreContainerEl.classList.remove("hide");
+  scorePage();
+  timerEl.textContent = "";
+  clearInterval(timeInterval);
+}
+
+// function to show score and prompt for initials
+function scorePage() {
   var scorePrompt = document.createElement("h1");
   scorePrompt.textContent = "All Done! Your final score is: " + timeLeft;
   scoreEl.append(scorePrompt);
@@ -116,17 +126,40 @@ function answerSelection(event) {
     var incorrectResponse = document.createElement("h2");
     incorrectResponse.textContent = "That was incorrect!";
     answerKeyEl.textContent = incorrectResponse.textContent;
+    timeLeft = timeLeft - 5;
+    timerEl.textContent = timeLeft;
   }
   if (currentIndex < questionsArray.length) {
     showNextQuestion();
   } else {
-    questionContainerEl.setAttribute("style", "display: none");
-    scoreContainerEl.classList.remove("hide");
-    scorePage();
+    gameOver();
   }
 }
 
-// // Event listeners
+// function to shuffle the Questions Array
+function shuffle(array) {
+  var indexShuffle = array.length,
+    temporaryValue,
+    randomIndex;
+
+  while (0 !== indexShuffle) {
+    // Picks a random remaining element
+    randomIndex = Math.floor(Math.random() * indexShuffle);
+    indexShuffle -= 1;
+    // Swaps it with the current element
+    temporaryValue = array[indexShuffle];
+    array[indexShuffle] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
+}
+
+//function goes to Score Page
+function gotoScores() {
+  windows.location = "/scores.html";
+}
+
+// Event listeners
 
 startButton.addEventListener("click", startQuiz);
 
@@ -134,3 +167,19 @@ firstAnswerEl.addEventListener("click", answerSelection);
 secondAnswerEl.addEventListener("click", answerSelection);
 thirdAnswerEl.addEventListener("click", answerSelection);
 fourthAnswerEl.addEventListener("click", answerSelection);
+
+// Submit button event listener
+submitBtn.addEventListener("click", function () {
+  var initials c
+
+  var scores = JSON.parse(localStorage.getItem("scores"));
+  //if scores is empty
+  if (!scores) {
+    scores = [];
+  }
+  scores.push({ initials: initials, score: timeLeft });
+  console.log(scores);
+  localStorage.setItem("scores", JSON.stringify(scores));
+});
+
+submitBtn.addEventListener("submit", gotoScores);

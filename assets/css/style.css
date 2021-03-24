@@ -46,3 +46,24 @@ body {
 #question {
 font-size: 2em;
 }
+
+#viewScores {
+    font-weight: bold;
+}
+
+#highscores {
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    background-color:purple;
+    border-radius: 15px;
+}
+
+#highscores li {
+    padding: 14px;
+    color: white;
+}
+
+#score-title {
+    color: purple;
+}

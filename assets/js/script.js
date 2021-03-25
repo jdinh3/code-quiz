@@ -166,6 +166,9 @@ fourthAnswerEl.addEventListener("click", answerSelection);
 submitBtn.addEventListener("click", function () {
   var initials = document.getElementById("initials").value;
   var scores = JSON.parse(localStorage.getItem("scores"));
+  if (!scores) {
+    scores = [];
+  }
   scores.push({ initials: initials, score: timeLeft });
   scores.sort((a, b) => b.score - a.score);
   console.log(scores);

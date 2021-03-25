@@ -154,13 +154,7 @@ function shuffle(array) {
   return array;
 }
 
-//function goes to Score Page
-function gotoScores() {
-  windows.location = "/scores.html";
-}
-
 // Event listeners
-
 startButton.addEventListener("click", startQuiz);
 
 firstAnswerEl.addEventListener("click", answerSelection);
@@ -170,16 +164,10 @@ fourthAnswerEl.addEventListener("click", answerSelection);
 
 // Submit button event listener
 submitBtn.addEventListener("click", function () {
-  var initials c
-
+  var initials = document.getElementById("initials").value;
   var scores = JSON.parse(localStorage.getItem("scores"));
-  //if scores is empty
-  if (!scores) {
-    scores = [];
-  }
   scores.push({ initials: initials, score: timeLeft });
+  scores.sort((a, b) => b.score - a.score);
   console.log(scores);
   localStorage.setItem("scores", JSON.stringify(scores));
 });
-
-submitBtn.addEventListener("submit", gotoScores);

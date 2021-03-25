@@ -25,6 +25,13 @@ body {
     text-align: center;
 }
 
+header a {
+    font-weight: bold;
+    position: relative;
+    bottom: 180px;
+    
+}
+
 /* Class Selectors */
 
 .btn-grid {
@@ -43,13 +50,6 @@ body {
     padding: 20px;
 }
 
-#question {
-font-size: 2em;
-}
-
-#viewScores {
-    font-weight: bold;
-}
 
 #highscores {
     font-weight: bold;
